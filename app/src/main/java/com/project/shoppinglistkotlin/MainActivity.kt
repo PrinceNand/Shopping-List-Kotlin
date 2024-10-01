@@ -34,34 +34,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoppingListKotlinTheme {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
-                ) {
-//                    val context = LocalContext.current
-                    var sItems by remember{ mutableStateOf( listOf<ShoppingItems>()) }
-                    Button(
-                        onClick = {
-//                            Toast.makeText(context, "Add Items", Toast.LENGTH_SHORT).show()
-                        },
-                        modifier = Modifier.align(Alignment.CenterHorizontally).padding(0.dp,25.dp,0.dp,0.dp)) {
-                        Text(text = "Add Items")
-                    }
 
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                    ) {
-                        items(sItems){
+                ShoppingListApp()
 
-                        }
-                    }
-                }
             }
         }
     }
 }
-
-
-data class ShoppingItems(val id:Int, var name:String, val quantity:Int, var editing:Boolean = false)
