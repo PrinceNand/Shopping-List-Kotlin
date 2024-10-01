@@ -148,11 +148,13 @@ fun ShoppingListItems(item: ShoppingItems,
         Text(text = "Qty: ${item.quantity}", modifier = Modifier.padding(8.dp))
 
         Row(modifier = Modifier.padding(8.dp)) {
-            IconButton(onClick = { onEditClick }) {
+            // lambda operation don't require {} in onclick
+            IconButton(onClick = onEditClick) {
                 Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Button")
             }
 
-            IconButton(onClick = { onDeleteClick }) {
+            // lambda operation don't require {} in onclick
+            IconButton(onClick = onDeleteClick) {
                 Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete Button")
             }
         }
