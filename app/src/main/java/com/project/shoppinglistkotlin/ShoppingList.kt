@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 
 data class ShoppingItems(val id:Int,
                          var name:String,
-                         val quantity:Int,
+                         var quantity:Int,
                          var editing:Boolean = false)
 
 @Composable
@@ -66,7 +66,36 @@ fun ShoppingListApp(){
                 .padding(16.dp),
         ) {
             items(sItems){
-                ShoppingListItems(item =it , onEditClick = { /*TODO*/ }, onDeleteClick = { /*TODO*/ })
+                itemIterator ->
+                if (itemIterator.editing){
+                    // edit item
+                    ShoppingItemEditor(item = itemIterator , onEditComplete = {
+                            editedName, editedQuantity ->
+
+                        // editing is done and changing only editing using copy keyword
+                        sItems = sItems.map { it.copy(editing = false) }
+
+                        // find item id and update data
+                        val editedItem = sItems.find { it.id == itemIterator.id }
+
+                        //let keyword change the required value in any place without changing full list
+                        editedItem?.let {
+                            it.name = editedName
+                            it.quantity = editedQuantity
+                        }
+
+                    })
+                } else {
+                    // show items
+                    ShoppingListItems(item =itemIterator ,
+                        onEditClick = {
+                            // finding which item we are clicking to edit
+                            sItems = sItems.map{ it.copy(editing = it.id == itemIterator.id)}
+                        }, onDeleteClick = {
+                            // deleting item which is selected in iterator
+                            sItems = sItems - itemIterator
+                    })
+                }
             }
         }
     }
