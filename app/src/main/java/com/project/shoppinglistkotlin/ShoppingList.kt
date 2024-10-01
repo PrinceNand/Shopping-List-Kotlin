@@ -140,7 +140,8 @@ fun ShoppingListItems(item: ShoppingItems,
             .border(
                 border = BorderStroke(2.dp, Color(0XFF0118786)),
                 shape = RoundedCornerShape(20)
-            )
+            ),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = item.name, modifier = Modifier.padding(8.dp))
 
